@@ -1,6 +1,6 @@
-# Description
+# KonTek
 
-KonTek is application to manage your contact.
+Web application to manage your contact.
 
 # Features
 
