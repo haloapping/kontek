@@ -5,7 +5,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -16,7 +16,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -27,7 +27,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -38,7 +38,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -49,7 +49,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -60,7 +60,7 @@ let contacts = [
     phone: "081234567891",
     email: "doe@jamil.com",
     company: "Toko Pak Edi",
-    jobRole: "CRUD Engineer",
+    jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
@@ -74,7 +74,7 @@ for (let i = 0; i < contacts.length; i++) {
   console.log(`Phone     : ${contacts[i].phone}`);
   console.log(`Email     : ${contacts[i].email}`);
   console.log(`Company   : ${contacts[i].company}`);
-  console.log(`Job Role  : ${contacts[i].jobRole}`);
+  console.log(`Job Role  : ${contacts[i].jobTitle}`);
   console.log(`Birthday  : ${contacts[i].birthday}`);
   console.log(`Notes     : ${contacts[i].notes}`);
   console.log("========================================");
