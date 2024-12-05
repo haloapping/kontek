@@ -1,7 +1,18 @@
-body {
+.contact-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
+  gap: 5px;
+}
+
+.contact-form div {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-form div {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-bottom: 20px;
 }
