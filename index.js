@@ -1,81 +1,80 @@
 let contacts = [
   {
     id: 1,
-    fullName: "John Doe",
+    fullName: "Appang",
     phone: "081234567891",
-    email: "doe@jamil.com",
+    email: "appang@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
+    labels: ["Partner", "Assistant"],
   },
   {
     id: 2,
-    fullName: "John Doe",
+    fullName: "Apping",
     phone: "081234567891",
-    email: "doe@jamil.com",
+    email: "apping@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
+    labels: ["Partner", "Manager"],
   },
   {
     id: 3,
-    fullName: "John Doe",
+    fullName: "Appung",
     phone: "081234567891",
-    email: "doe@jamil.com",
+    email: "appung@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
+    labels: ["Brother"],
   },
   {
     id: 4,
-    fullName: "John Doe",
+    fullName: "Appeng",
     phone: "081234567891",
-    email: "doe@jamil.com",
+    email: "appeng@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
+    labels: ["Child", "Brother"],
   },
   {
     id: 5,
-    fullName: "John Doe",
+    fullName: "Appong",
     phone: "081234567891",
-    email: "doe@jamil.com",
+    email: "appong@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-  },
-  {
-    id: 5,
-    fullName: "John Doe",
-    phone: "081234567891",
-    email: "doe@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
+    labels: ["Child", "Brother"],
   },
 ];
 
-console.log("KonTek List:");
-for (let i = 0; i < contacts.length; i++) {
-  console.log(`Id        : ${contacts[i].id}`);
-  console.log(`Full Name : ${contacts[i].fullName}`);
-  console.log(`Phone     : ${contacts[i].phone}`);
-  console.log(`Email     : ${contacts[i].email}`);
-  console.log(`Company   : ${contacts[i].company}`);
-  console.log(`Job Role  : ${contacts[i].jobTitle}`);
-  console.log(`Birthday  : ${contacts[i].birthday}`);
-  console.log(`Notes     : ${contacts[i].notes}`);
-  console.log("========================================");
+function showAllContacts() {
+  console.log("KonTek List:");
+  for (let i = 0; i < contacts.length; i++) {
+    console.log(`Id        : ${contacts[i].id}`);
+    console.log(`Full Name : ${contacts[i].fullName}`);
+    console.log(`Phone     : ${contacts[i].phone}`);
+    console.log(`Email     : ${contacts[i].email}`);
+    console.log(`Company   : ${contacts[i].company}`);
+    console.log(`Job Title : ${contacts[i].jobTitle}`);
+    console.log(`Birthday  : ${contacts[i].birthday}`);
+    console.log(`Notes     : ${contacts[i].notes}`);
+    console.log(`Labels    : ${contacts[i].labels}`);
+    console.log("========================================");
+  }
 }
+
+showAllContacts();
