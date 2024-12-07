@@ -9,7 +9,7 @@ let contacts = [
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-    labels: ["Partner", "Assistant"],
+    label: "Assistant",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ let contacts = [
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-    labels: ["Partner", "Manager"],
+    label: "Partner",
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ let contacts = [
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-    labels: ["Brother"],
+    label: "Brother",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ let contacts = [
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-    labels: ["Child", "Brother"],
+    label: "Brother",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ let contacts = [
     address: "Jalan Jalan",
     birthday: "11-12-2012",
     notes: "notes",
-    labels: ["Child", "Brother"],
+    label: "Child",
   },
 ];
 
@@ -72,7 +72,7 @@ function showAllContacts() {
     console.log(`Job Title : ${contacts[i].jobTitle}`);
     console.log(`Birthday  : ${contacts[i].birthday}`);
     console.log(`Notes     : ${contacts[i].notes}`);
-    console.log(`Labels    : ${contacts[i].labels}`);
+    console.log(`Label    : ${contacts[i].labels}`);
     console.log("========================================");
   }
 }
