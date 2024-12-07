@@ -72,7 +72,7 @@ function showAllContacts() {
     console.log(`Job Title : ${contacts[i].jobTitle}`);
     console.log(`Birthday  : ${contacts[i].birthday}`);
     console.log(`Notes     : ${contacts[i].notes}`);
-    console.log(`Label    : ${contacts[i].labels}`);
+    console.log(`Label     : ${contacts[i].label}`);
     console.log("========================================");
   }
 }
