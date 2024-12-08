@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KonTek</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>KonTek</h1>
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="index.html">Contacts</a>
+          </li>
+          <li>
+            <a href="create-form.html">Create Contact</a>
+          </li>
+        </ul>
+        <form action="" class="search-form">
+          <div>
+            <label for="search">Search</label>
+            <input type="search" name="search" id="search" />
+          </div>
+        </form>
+      </nav>
+    </header>
+
+    <main>
+      <form action="" class="contact-form">
+        <div>
+          <label for="full-name">Full Name</label>
+          <input type="text" name="full-name" id="full-name" required />
+        </div>
+
+        <div>
+          <label for="phone">Phone</label>
+          <input type="tel" name="phone" id="phone" required />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+        </div>
+
+        <div>
+          <label for="company">Company</label>
+          <input type="text" name="company" id="company" />
+        </div>
+
+        <div>
+          <label for="job-title">Job Title</label>
+          <input type="text" name="job-title" id="job-title" />
+        </div>
+
+        <div>
+          <label for="address">Address</label>
+          <textarea name="address" id="address" rows="4"></textarea>
+        </div>
+
+        <div>
+          <label for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" />
+        </div>
+
+        <div>
+          <label for="label">Label</label>
+          <select name="label" id="label">
+            <option value="-">-</option>
+            <option value="partner">Partner</option>
+            <option value="manager">Manager</option>
+            <option value="assistant">Assistant</option>
+            <option value="child">Child</option>
+            <option value="brother">Brother</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="notes">Notes</label>
+          <textarea name="notes" id="notes" rows="4"></textarea>
+        </div>
+
+        <div class="btn-submit">
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </main>
+
+    <footer></footer>
+    <script src="index.js"></script>
+  </body>
+</html>
