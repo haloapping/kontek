@@ -1,80 +1,253 @@
+function showAllContacts(contacts) {
+  console.log("KonTek List:");
+  if (contacts.length === 0) {
+    console.log("Contact not found");
+  } else {
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].deletedAt === null) {
+        console.log(`Id        : ${contacts[i].ID}`);
+        console.log(`Full Name : ${contacts[i].fullName}`);
+        console.log(`Phone     : ${contacts[i].phone}`);
+        console.log(`Email     : ${contacts[i].email}`);
+        console.log(`Company   : ${contacts[i].company}`);
+        console.log(`Job Title : ${contacts[i].jobTitle}`);
+        console.log(`Birthdate : ${contacts[i].birthdate}`);
+        console.log(`Note      : ${contacts[i].note}`);
+        console.log(`Label     : ${contacts[i].label}`);
+        console.log("-------------------------------------------");
+      }
+    }
+  }
+}
+
+function showDetailContactByID(contacts, ID) {
+  console.log("Detail Contact: ");
+  const contactById = contacts.find(
+    (contact) => contact.ID === ID && contact.deletedAt === null
+  );
+  if (contactById === undefined) {
+    console.log(`Contact with ID ${ID} not found.`);
+  } else {
+    console.log(`ID         : ${contactById.ID}`);
+    console.log(`Full Name  : ${contactById.fullName}`);
+    console.log(`Phone      : ${contactById.phone}`);
+    console.log(`Email      : ${contactById.email}`);
+    console.log(`Company    : ${contactById.company}`);
+    console.log(`Job Title  : ${contactById.jobTitle}`);
+    console.log(`Address    : ${contactById.address}`);
+    console.log(`Birthdate  : ${contactById.birthdate}`);
+    console.log(`Note       : ${contactById.note}`);
+    console.log(`Label      : ${contactById.label}`);
+    console.log(`Created At : ${contactById.createdAt}`);
+    console.log(`Updated At : ${contactById.updatedAt}`);
+    console.log(`Deleted At : ${contactById.deletedAt}`);
+  }
+}
+
+function searchContact(contacts, keyword) {
+  const foundContacts = contacts.filter(
+    (contact) =>
+      contact.ID === keyword ||
+      contact.fullName.includes(keyword) ||
+      contact.phone.includes(keyword) ||
+      contact.email.includes(keyword) ||
+      contact.company.includes(keyword) ||
+      contact.jobTitle.includes(keyword) ||
+      contact.address.includes(keyword)
+  );
+
+  showAllContacts(foundContacts);
+}
+
+function addContact(contacts) {
+  const ID = contacts[contacts.length - 1].ID + 1;
+  const fullName = prompt("Full Name  :");
+  const phone = prompt("Phone      :");
+  const email = prompt("Email      :");
+  const company = prompt("Company    :");
+  const jobTitle = prompt("Job Title  :");
+  const address = prompt("Address    :");
+  const birthdate = prompt("Birthdate  :");
+  const note = prompt("Note       :");
+  const label = prompt("Label      :");
+
+  contacts.push({
+    ID: ID,
+    fullName: fullName,
+    phone: phone,
+    email: email,
+    company: company,
+    jobTitle: jobTitle,
+    address: address,
+    birthdate: new Date(birthdate).toLocaleDateString(),
+    note: note,
+    label: label,
+    createdAt: new Date().toLocaleDateString(),
+    updatedAt: null,
+    deletedAt: null,
+  });
+
+  console.log("Contact is added :)");
+}
+
+function updateContactByID(contacts, ID) {
+  for (let index = 0; index < contacts.length; index++) {
+    if (contacts[index].ID === ID) {
+      const fullName = prompt(`Full Name (${contacts[index].fullName}):`);
+      if (fullName !== "") {
+        contacts[index].fullName = fullName;
+      }
+
+      const phone = prompt(`Phone (${contacts[index].phone}):`);
+      if (phone !== "") {
+        contacts[index].phone = phone;
+      }
+
+      const email = prompt(`Email (${contacts[index].email}):`);
+      if (email !== "") {
+        contacts[index].email = email;
+      }
+
+      const company = prompt(`Company (${contacts[index].company}):`);
+      if (company !== "") {
+        contacts[index].company = company;
+      }
+
+      const jobTitle = prompt(`Job Title (${contacts[index].jobTitle}):`);
+      if (jobTitle !== "") {
+        contacts[index].jobTitle = jobTitle;
+      }
+
+      const address = prompt(`Address (${contacts[index].address}):`);
+      if (address !== "") {
+        contacts[index].address = address;
+      }
+
+      const birthdate = prompt(`Birthdate (${contacts[index].birthdate}):`);
+      if (birthdate !== "") {
+        contacts[index].birthdate = birthdate;
+      }
+
+      const note = prompt(`Note (${contacts[index].note}): `);
+      if (note !== "") {
+        contacts[index].note = note;
+      }
+
+      const label = prompt(`Label (${contacts[index].label}):`);
+      if (label !== "") {
+        contacts[index].label = label;
+      }
+
+      contacts[index].updatedAt = new Date().getDate();
+      console.log(`Contact with ID ${ID} is updated :)`);
+      break;
+    }
+  }
+
+  console.log("Contact not found");
+}
+
+function deleteContactById(contacts, ID) {
+  const indexContact = contacts.findIndex((contact) => contact.ID === ID);
+
+  if (indexContact === -1) {
+    console.log("Contact not found");
+  } else {
+    contacts[indexContact].deletedAt = new Date().toLocaleDateString();
+    console.log("Contact is deleted :)");
+  }
+}
+
+// define some data
 let contacts = [
   {
-    id: 1,
+    ID: 1,
     fullName: "Appang",
     phone: "081234567891",
     email: "appang@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
+    birthdate: new Date("1998-01-11").toLocaleDateString(),
+    note: "note",
     label: "Assistant",
+    createdAt: new Date().toLocaleDateString(),
+    updatedAt: null,
+    deletedAt: null,
   },
   {
-    id: 2,
+    ID: 2,
     fullName: "Apping",
     phone: "081234567891",
     email: "apping@jamil.com",
     company: "Toko Pak Edi",
     jobTitle: "CRUD Engineer",
     address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
+    birthdate: new Date("1999-02-15").toLocaleDateString(),
+    note: "note",
     label: "Partner",
-  },
-  {
-    id: 3,
-    fullName: "Appung",
-    phone: "081234567891",
-    email: "appung@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
-    label: "Brother",
-  },
-  {
-    id: 4,
-    fullName: "Appeng",
-    phone: "081234567891",
-    email: "appeng@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
-    label: "Brother",
-  },
-  {
-    id: 5,
-    fullName: "Appong",
-    phone: "081234567891",
-    email: "appong@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthday: "11-12-2012",
-    notes: "notes",
-    label: "Child",
+    createdAt: new Date().toLocaleDateString(),
+    updatedAt: null,
+    deletedAt: null,
   },
 ];
 
-function showAllContacts() {
-  console.log("KonTek List:");
-  for (let i = 0; i < contacts.length; i++) {
-    console.log(`Id        : ${contacts[i].id}`);
-    console.log(`Full Name : ${contacts[i].fullName}`);
-    console.log(`Phone     : ${contacts[i].phone}`);
-    console.log(`Email     : ${contacts[i].email}`);
-    console.log(`Company   : ${contacts[i].company}`);
-    console.log(`Job Title : ${contacts[i].jobTitle}`);
-    console.log(`Birthday  : ${contacts[i].birthday}`);
-    console.log(`Notes     : ${contacts[i].notes}`);
-    console.log(`Label     : ${contacts[i].label}`);
-    console.log("========================================");
+let currentId = contacts[contacts.length - 1].ID;
+
+while (true) {
+  console.log(` ___   _  _______  __    _  _______  _______  ___   _ 
+|   | | ||       ||  |  | ||       ||       ||   | | |
+|   |_| ||   _   ||   |_| ||_     _||    ___||   |_| |
+|      _||  | |  ||       |  |   |  |   |___ |      _|
+|     |_ |  |_|  ||  _    |  |   |  |    ___||     |_ 
+|    _  ||       || | |   |  |   |  |   |___ |    _  |
+|___| |_||_______||_|  |__|  |___|  |_______||___| |_|
+`);
+  console.log("List of Menu:");
+  console.log("1. Show All Contacts");
+  console.log("2. Detail Contact");
+  console.log("3. Search Contact");
+  console.log("4. Add Contact");
+  console.log("5. Update Contact");
+  console.log("6. Delete Contact");
+  console.log("7. Exit");
+  console.log("============================================\n");
+  let menuOption = prompt("Choose menu (1/2/3/4/5/6/7):");
+
+  if (menuOption === "1") {
+    console.log("Show All Contacts");
+    showAllContacts(contacts);
+    console.log("============================================\n");
+  } else if (menuOption === "2") {
+    console.log("Detail Contact By ID");
+    const ID = parseInt(prompt("Enter ID Contact: "));
+    showDetailContactByID(contacts, ID);
+    console.log("============================================\n");
+  } else if (menuOption === "3") {
+    console.log("Search Contact");
+    const keyword = prompt("Enter keyword: ");
+    searchContact(contacts, keyword);
+    console.log("============================================\n");
+  } else if (menuOption === "4") {
+    console.log("Add Contact");
+    addContact(contacts);
+  } else if (menuOption === "5") {
+    console.log("Update Contact");
+    const ID = parseInt(prompt("Enter ID Contact: "));
+    updateContactByID(contacts, ID);
+    console.log("============================================\n");
+  } else if (menuOption === "6") {
+    console.log("Delete Contact");
+    const ID = parseInt(prompt("Enter ID Contact: "));
+    deleteContactById(contacts, ID);
+    console.log("============================================\n");
+  } else if (menuOption === "7") {
+    console.log("Bye!");
+    break;
+  } else {
+    console.log(
+      `Menu ${menuOption} is not available. Use menu 1/2/3/4/5/6/7.\n`
+    );
+    console.log("============================================\n");
   }
 }
-
-showAllContacts();
