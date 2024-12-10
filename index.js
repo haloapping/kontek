@@ -1,7 +1,6 @@
 function showAllContacts(contacts) {
-  console.log("KonTek List:");
   if (contacts.length === 0) {
-    console.log("Contact not found");
+    console.log("Contact is empty.");
   } else {
     for (let i = 0; i < contacts.length; i++) {
       if (contacts[i].deletedAt === null) {
@@ -21,7 +20,6 @@ function showAllContacts(contacts) {
 }
 
 function showDetailContactByID(contacts, ID) {
-  console.log("Detail Contact: ");
   const contactById = contacts.find(
     (contact) => contact.ID === ID && contact.deletedAt === null
   );
@@ -47,13 +45,15 @@ function showDetailContactByID(contacts, ID) {
 function searchContact(contacts, keyword) {
   const foundContacts = contacts.filter(
     (contact) =>
-      contact.ID === keyword ||
       contact.fullName.includes(keyword) ||
       contact.phone.includes(keyword) ||
       contact.email.includes(keyword) ||
       contact.company.includes(keyword) ||
       contact.jobTitle.includes(keyword) ||
-      contact.address.includes(keyword)
+      contact.address.includes(keyword) ||
+      contact.birthdate.includes(keyword) ||
+      contact.note.includes(keyword) ||
+      contact.label.includes(keyword)
   );
 
   showAllContacts(foundContacts);
@@ -91,60 +91,63 @@ function addContact(contacts) {
 }
 
 function updateContactByID(contacts, ID) {
-  for (let index = 0; index < contacts.length; index++) {
+  let index;
+  for (index = 0; index < contacts.length; index++) {
     if (contacts[index].ID === ID) {
       const fullName = prompt(`Full Name (${contacts[index].fullName}):`);
-      if (fullName !== "") {
+      if (fullName !== null) {
         contacts[index].fullName = fullName;
       }
 
       const phone = prompt(`Phone (${contacts[index].phone}):`);
-      if (phone !== "") {
+      if (phone !== null) {
         contacts[index].phone = phone;
       }
 
       const email = prompt(`Email (${contacts[index].email}):`);
-      if (email !== "") {
+      if (email !== null) {
         contacts[index].email = email;
       }
 
       const company = prompt(`Company (${contacts[index].company}):`);
-      if (company !== "") {
+      if (company !== null) {
         contacts[index].company = company;
       }
 
       const jobTitle = prompt(`Job Title (${contacts[index].jobTitle}):`);
-      if (jobTitle !== "") {
+      if (jobTitle !== null) {
         contacts[index].jobTitle = jobTitle;
       }
 
       const address = prompt(`Address (${contacts[index].address}):`);
-      if (address !== "") {
+      if (address !== null) {
         contacts[index].address = address;
       }
 
       const birthdate = prompt(`Birthdate (${contacts[index].birthdate}):`);
-      if (birthdate !== "") {
+      if (birthdate !== null) {
         contacts[index].birthdate = birthdate;
       }
 
       const note = prompt(`Note (${contacts[index].note}): `);
-      if (note !== "") {
+      if (note !== null) {
         contacts[index].note = note;
       }
 
       const label = prompt(`Label (${contacts[index].label}):`);
-      if (label !== "") {
+      if (label !== null) {
         contacts[index].label = label;
       }
 
-      contacts[index].updatedAt = new Date().getDate();
+      contacts[index].updatedAt = new Date().toLocaleDateString();
       console.log(`Contact with ID ${ID} is updated :)`);
       break;
     }
   }
 
-  console.log("Contact not found");
+  if (index === contacts.length - 1) {
+    console.log("Contact not found");
+  }
 }
 
 function deleteContactById(contacts, ID) {
@@ -154,11 +157,10 @@ function deleteContactById(contacts, ID) {
     console.log("Contact not found");
   } else {
     contacts[indexContact].deletedAt = new Date().toLocaleDateString();
-    console.log("Contact is deleted :)");
+    console.log(`Contact with ID ${ID} is deleted :)`);
   }
 }
 
-// define some data
 let contacts = [
   {
     ID: 1,
@@ -192,8 +194,6 @@ let contacts = [
   },
 ];
 
-let currentId = contacts[contacts.length - 1].ID;
-
 while (true) {
   console.log(` ___   _  _______  __    _  _______  _______  ___   _ 
 |   | | ||       ||  |  | ||       ||       ||   | | |
@@ -204,43 +204,43 @@ while (true) {
 |___| |_||_______||_|  |__|  |___|  |_______||___| |_|
 `);
   console.log("List of Menu:");
-  console.log("1. Show All Contacts");
-  console.log("2. Detail Contact");
-  console.log("3. Search Contact");
-  console.log("4. Add Contact");
-  console.log("5. Update Contact");
-  console.log("6. Delete Contact");
-  console.log("7. Exit");
-  console.log("============================================\n");
+  console.log("[1] Show All Contacts");
+  console.log("[2] Detail Contact");
+  console.log("[3] Search Contact");
+  console.log("[4] Add Contact");
+  console.log("[5] Update Contact");
+  console.log("[6] Delete Contact");
+  console.log("[7] Exit");
+  console.log("===========================================\n");
   let menuOption = prompt("Choose menu (1/2/3/4/5/6/7):");
 
   if (menuOption === "1") {
-    console.log("Show All Contacts");
+    console.log("SHOW ALL CONTACTS\n");
     showAllContacts(contacts);
-    console.log("============================================\n");
+    console.log("===========================================\n");
   } else if (menuOption === "2") {
-    console.log("Detail Contact By ID");
-    const ID = parseInt(prompt("Enter ID Contact: "));
+    console.log("DETAIL CONTACT BY ID\n");
+    const ID = parseInt(prompt("Enter ID Contact:"));
     showDetailContactByID(contacts, ID);
-    console.log("============================================\n");
+    console.log("===========================================\n");
   } else if (menuOption === "3") {
-    console.log("Search Contact");
-    const keyword = prompt("Enter keyword: ");
+    console.log("SEARCH CONTACT\n");
+    const keyword = prompt("Enter keyword:");
     searchContact(contacts, keyword);
-    console.log("============================================\n");
+    console.log("===========================================\n");
   } else if (menuOption === "4") {
-    console.log("Add Contact");
+    console.log("ADD CONTACT\n");
     addContact(contacts);
   } else if (menuOption === "5") {
-    console.log("Update Contact");
-    const ID = parseInt(prompt("Enter ID Contact: "));
+    console.log("UPDATE CONTACT\n");
+    const ID = parseInt(prompt("Enter ID Contact:"));
     updateContactByID(contacts, ID);
-    console.log("============================================\n");
+    console.log("===========================================\n");
   } else if (menuOption === "6") {
-    console.log("Delete Contact");
-    const ID = parseInt(prompt("Enter ID Contact: "));
+    console.log("DELETE CONTACT");
+    const ID = parseInt(prompt("Enter ID Contact:"));
     deleteContactById(contacts, ID);
-    console.log("============================================\n");
+    console.log("===========================================\n");
   } else if (menuOption === "7") {
     console.log("Bye!");
     break;
@@ -248,6 +248,8 @@ while (true) {
     console.log(
       `Menu ${menuOption} is not available. Use menu 1/2/3/4/5/6/7.\n`
     );
-    console.log("============================================\n");
+    console.log("===========================================\n");
   }
+
+  prompt("Enter to continue...");
 }
