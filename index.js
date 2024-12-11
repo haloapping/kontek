@@ -19,27 +19,28 @@ function showAllContacts(contacts) {
   }
 }
 
-function showDetailContactByID(contacts, ID) {
+function getContactByID(contacts, ID) {
   const contactById = contacts.find(
     (contact) => contact.ID === ID && contact.deletedAt === null
   );
-  if (contactById === undefined) {
-    console.log(`Contact with ID ${ID} not found.`);
-  } else {
-    console.log(`ID         : ${contactById.ID}`);
-    console.log(`Full Name  : ${contactById.fullName}`);
-    console.log(`Phone      : ${contactById.phone}`);
-    console.log(`Email      : ${contactById.email}`);
-    console.log(`Company    : ${contactById.company}`);
-    console.log(`Job Title  : ${contactById.jobTitle}`);
-    console.log(`Address    : ${contactById.address}`);
-    console.log(`Birthdate  : ${contactById.birthdate}`);
-    console.log(`Note       : ${contactById.note}`);
-    console.log(`Label      : ${contactById.label}`);
-    console.log(`Created At : ${contactById.createdAt}`);
-    console.log(`Updated At : ${contactById.updatedAt}`);
-    console.log(`Deleted At : ${contactById.deletedAt}`);
-  }
+
+  return contactById;
+}
+
+function showDetailContactByID(contact) {
+  console.log(`ID         : ${contact.ID}`);
+  console.log(`Full Name  : ${contact.fullName}`);
+  console.log(`Phone      : ${contact.phone}`);
+  console.log(`Email      : ${contact.email}`);
+  console.log(`Company    : ${contact.company}`);
+  console.log(`Job Title  : ${contact.jobTitle}`);
+  console.log(`Address    : ${contact.address}`);
+  console.log(`Birthdate  : ${contact.birthdate}`);
+  console.log(`Note       : ${contact.note}`);
+  console.log(`Label      : ${contact.label}`);
+  console.log(`Created At : ${contact.createdAt}`);
+  console.log(`Updated At : ${contact.updatedAt}`);
+  console.log(`Deleted At : ${contact.deletedAt}`);
 }
 
 function searchContact(contacts, keyword) {
@@ -56,7 +57,7 @@ function searchContact(contacts, keyword) {
       contact.label.includes(keyword)
   );
 
-  showAllContacts(foundContacts);
+  return foundContacts;
 }
 
 function addContact(contacts) {
@@ -154,7 +155,7 @@ function deleteContactById(contacts, ID) {
   const indexContact = contacts.findIndex((contact) => contact.ID === ID);
 
   if (indexContact === -1) {
-    console.log("Contact not found");
+    console.log(`Contact with ID ${ID} not found`);
   } else {
     contacts[indexContact].deletedAt = new Date().toLocaleDateString();
     console.log(`Contact with ID ${ID} is deleted :)`);
@@ -221,12 +222,22 @@ while (true) {
   } else if (menuOption === "2") {
     console.log("DETAIL CONTACT BY ID\n");
     const ID = parseInt(prompt("Enter ID Contact:"));
-    showDetailContactByID(contacts, ID);
+    const contactByID = getContactByID(contacts, ID);
+    if (contactByID === undefined) {
+      console.log("Contact not found");
+    } else {
+      showDetailContactByID(contactByID);
+    }
     console.log("===========================================\n");
   } else if (menuOption === "3") {
     console.log("SEARCH CONTACT\n");
     const keyword = prompt("Enter keyword:");
-    searchContact(contacts, keyword);
+    const foundContacts = searchContact(contacts, keyword);
+    if (foundContacts.length === 0) {
+      console.log("Contact not found");
+    } else {
+      showAllContacts(foundContacts);
+    }
     console.log("===========================================\n");
   } else if (menuOption === "4") {
     console.log("ADD CONTACT\n");
