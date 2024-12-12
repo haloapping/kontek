@@ -146,7 +146,7 @@ function updateContactByID(contacts, ID) {
     }
   }
 
-  if (index === contacts.length - 1) {
+  if (index === contacts.length) {
     console.log("Contact not found");
   }
 }
