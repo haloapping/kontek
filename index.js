@@ -152,7 +152,9 @@ function updateContactByID(contacts, ID) {
 }
 
 function deleteContactById(contacts, ID) {
-  const indexContact = contacts.findIndex((contact) => contact.ID === ID);
+  const indexContact = contacts.findIndex(
+    (contact) => contact.ID === ID && contact.deletedAt === null
+  );
 
   if (indexContact === -1) {
     console.log(`Contact with ID ${ID} not found`);
