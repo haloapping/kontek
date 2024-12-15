@@ -1,3 +1,38 @@
+let contacts = [
+  {
+    ID: 1,
+    fullName: "Appang",
+    phone: "081234567891",
+    email: "appang@jamil.com",
+    company: "Toko Pak Edi",
+    jobTitle: "CRUD Engineer",
+    address: "Jalan Jalan",
+    birthdate: new Date("1998-01-11"),
+    note: "note",
+    label: "Assistant",
+    isFavourite: true,
+    createdAt: new Date(),
+    updatedAt: null,
+    deletedAt: null,
+  },
+  {
+    ID: 2,
+    fullName: "Apping",
+    phone: "081234567891",
+    email: "apping@jamil.com",
+    company: "Toko Pak Edi",
+    jobTitle: "CRUD Engineer",
+    address: "Jalan Jalan",
+    birthdate: new Date("1999-02-15"),
+    note: "note",
+    label: "Partner",
+    isFavourite: false,
+    createdAt: new Date(),
+    updatedAt: null,
+    deletedAt: null,
+  },
+];
+
 function showAllContacts(contacts) {
   if (contacts.length === 0) {
     console.log("Contact is empty.");
@@ -10,9 +45,10 @@ function showAllContacts(contacts) {
         console.log(`Email     : ${contacts[i].email}`);
         console.log(`Company   : ${contacts[i].company}`);
         console.log(`Job Title : ${contacts[i].jobTitle}`);
-        console.log(`Birthdate : ${contacts[i].birthdate}`);
+        console.log(`Birthdate : ${contacts[i].birthdate.toLocaleDateString()}`);
         console.log(`Note      : ${contacts[i].note}`);
         console.log(`Label     : ${contacts[i].label}`);
+        console.log(`Favourite : ${contacts[i].isFavourite ? "✅️" : "❌️"}`);
         console.log("-------------------------------------------");
       }
     }
@@ -20,11 +56,7 @@ function showAllContacts(contacts) {
 }
 
 function getContactByID(contacts, ID) {
-  const contactById = contacts.find(
-    (contact) => contact.ID === ID && contact.deletedAt === null
-  );
-
-  return contactById;
+  return contacts.find((contact) => contact.ID === ID && contact.deletedAt === null);
 }
 
 function showDetailContactByID(contact) {
@@ -35,15 +67,16 @@ function showDetailContactByID(contact) {
   console.log(`Company    : ${contact.company}`);
   console.log(`Job Title  : ${contact.jobTitle}`);
   console.log(`Address    : ${contact.address}`);
-  console.log(`Birthdate  : ${contact.birthdate}`);
+  console.log(`Birthdate  : ${contact.birthdate.toLocaleDateString()}`);
   console.log(`Note       : ${contact.note}`);
   console.log(`Label      : ${contact.label}`);
+  console.log(`Favourite  : ${contact.isFavourite ? "✅️" : "❌️"}`);
   console.log(`Created At : ${contact.createdAt}`);
   console.log(`Updated At : ${contact.updatedAt}`);
   console.log(`Deleted At : ${contact.deletedAt}`);
 }
 
-function searchContact(contacts, keyword) {
+function searchContacts(contacts, keyword) {
   const foundContacts = contacts.filter(
     (contact) =>
       contact.fullName.includes(keyword) ||
@@ -52,7 +85,7 @@ function searchContact(contacts, keyword) {
       contact.company.includes(keyword) ||
       contact.jobTitle.includes(keyword) ||
       contact.address.includes(keyword) ||
-      contact.birthdate.includes(keyword) ||
+      contact.birthdate.toLocaleDateString().includes(keyword) ||
       contact.note.includes(keyword) ||
       contact.label.includes(keyword)
   );
@@ -62,15 +95,16 @@ function searchContact(contacts, keyword) {
 
 function addContact(contacts) {
   const ID = contacts[contacts.length - 1].ID + 1;
-  const fullName = prompt("Full Name  :");
-  const phone = prompt("Phone      :");
-  const email = prompt("Email      :");
-  const company = prompt("Company    :");
-  const jobTitle = prompt("Job Title  :");
-  const address = prompt("Address    :");
-  const birthdate = prompt("Birthdate  :");
-  const note = prompt("Note       :");
-  const label = prompt("Label      :");
+  const fullName = prompt("Full Name    :");
+  const phone = prompt("Phone        :");
+  const email = prompt("Email        :");
+  const company = prompt("Company      :");
+  const jobTitle = prompt("Job Title    :");
+  const address = prompt("Address      :");
+  const birthdate = prompt("Birthdate    :");
+  const note = prompt("Note         :");
+  const label = prompt("Label        :");
+  const isFavourite = prompt("Is Favourite :");
 
   contacts.push({
     ID: ID,
@@ -80,10 +114,11 @@ function addContact(contacts) {
     company: company,
     jobTitle: jobTitle,
     address: address,
-    birthdate: new Date(birthdate).toLocaleDateString(),
+    birthdate: new Date(birthdate),
     note: note,
     label: label,
-    createdAt: new Date().toLocaleDateString(),
+    isFavourite: isFavourite,
+    createdAt: new Date(),
     updatedAt: null,
     deletedAt: null,
   });
@@ -95,52 +130,20 @@ function updateContactByID(contacts, ID) {
   let index;
   for (index = 0; index < contacts.length; index++) {
     if (contacts[index].ID === ID) {
-      const fullName = prompt(`Full Name (${contacts[index].fullName}):`);
-      if (fullName !== null) {
-        contacts[index].fullName = fullName;
+      contacts[index].fullName = prompt(`Full Name (${contacts[index].fullName}):`) || contacts[index].fullName;
+      contacts[index].phone = prompt(`Phone (${contacts[index].phone}):`) || contacts[index].phone;
+      contacts[index].email = prompt(`Email (${contacts[index].email}):`) || contacts[index].email;
+      contacts[index].company = prompt(`Company (${contacts[index].company}):`) || contacts[index].company;
+      contacts[index].jobTitle = prompt(`Job Title (${contacts[index].jobTitle}):`) || contacts[index].jobTitle;
+      contacts[index].address = prompt(`Address (${contacts[index].address}):`) || contacts[index].address;
+      contacts[index].birthdate = prompt(`Birthdate (${contacts[index].birthdate}):`) || contacts[index].birthdate;
+      contacts[index].note = prompt(`Note (${contacts[index].note}): `) || contacts[index].note;
+      contacts[index].label = prompt(`Label (${contacts[index].label}):`) || contacts[index].label;
+      const isFavourite = prompt(`Is favourite (${contacts[index].isFavourite}):`);
+      if (isFavourite !== null) {
+        contacts[index].isFavourite = isFavourite === "true";
       }
-
-      const phone = prompt(`Phone (${contacts[index].phone}):`);
-      if (phone !== null) {
-        contacts[index].phone = phone;
-      }
-
-      const email = prompt(`Email (${contacts[index].email}):`);
-      if (email !== null) {
-        contacts[index].email = email;
-      }
-
-      const company = prompt(`Company (${contacts[index].company}):`);
-      if (company !== null) {
-        contacts[index].company = company;
-      }
-
-      const jobTitle = prompt(`Job Title (${contacts[index].jobTitle}):`);
-      if (jobTitle !== null) {
-        contacts[index].jobTitle = jobTitle;
-      }
-
-      const address = prompt(`Address (${contacts[index].address}):`);
-      if (address !== null) {
-        contacts[index].address = address;
-      }
-
-      const birthdate = prompt(`Birthdate (${contacts[index].birthdate}):`);
-      if (birthdate !== null) {
-        contacts[index].birthdate = birthdate;
-      }
-
-      const note = prompt(`Note (${contacts[index].note}): `);
-      if (note !== null) {
-        contacts[index].note = note;
-      }
-
-      const label = prompt(`Label (${contacts[index].label}):`);
-      if (label !== null) {
-        contacts[index].label = label;
-      }
-
-      contacts[index].updatedAt = new Date().toLocaleDateString();
+      contacts[index].updatedAt = new Date();
       console.log(`Contact with ID ${ID} is updated :)`);
       break;
     }
@@ -152,50 +155,15 @@ function updateContactByID(contacts, ID) {
 }
 
 function deleteContactById(contacts, ID) {
-  const indexContact = contacts.findIndex(
-    (contact) => contact.ID === ID && contact.deletedAt === null
-  );
+  const indexContact = contacts.findIndex((contact) => contact.ID === ID && contact.deletedAt === null);
 
   if (indexContact === -1) {
     console.log(`Contact with ID ${ID} not found`);
   } else {
-    contacts[indexContact].deletedAt = new Date().toLocaleDateString();
+    contacts[indexContact].deletedAt = new Date();
     console.log(`Contact with ID ${ID} is deleted :)`);
   }
 }
-
-let contacts = [
-  {
-    ID: 1,
-    fullName: "Appang",
-    phone: "081234567891",
-    email: "appang@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthdate: new Date("1998-01-11").toLocaleDateString(),
-    note: "note",
-    label: "Assistant",
-    createdAt: new Date().toLocaleDateString(),
-    updatedAt: null,
-    deletedAt: null,
-  },
-  {
-    ID: 2,
-    fullName: "Apping",
-    phone: "081234567891",
-    email: "apping@jamil.com",
-    company: "Toko Pak Edi",
-    jobTitle: "CRUD Engineer",
-    address: "Jalan Jalan",
-    birthdate: new Date("1999-02-15").toLocaleDateString(),
-    note: "note",
-    label: "Partner",
-    createdAt: new Date().toLocaleDateString(),
-    updatedAt: null,
-    deletedAt: null,
-  },
-];
 
 while (true) {
   console.log(` ___   _  _______  __    _  _______  _______  ___   _ 
@@ -234,7 +202,7 @@ while (true) {
   } else if (menuOption === "3") {
     console.log("SEARCH CONTACT\n");
     const keyword = prompt("Enter keyword:");
-    const foundContacts = searchContact(contacts, keyword);
+    const foundContacts = searchContacts(contacts, keyword);
     if (foundContacts.length === 0) {
       console.log("Contact not found");
     } else {
@@ -258,9 +226,7 @@ while (true) {
     console.log("Bye!");
     break;
   } else {
-    console.log(
-      `Menu ${menuOption} is not available. Use menu 1/2/3/4/5/6/7.\n`
-    );
+    console.log(`Menu ${menuOption} is not available. Use menu 1/2/3/4/5/6/7.\n`);
     console.log("===========================================\n");
   }
 
