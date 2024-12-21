@@ -50,13 +50,3 @@ tr > * {
 .contact-detail ul {
   list-style: disc;
 }
-
-.btn-action {
-  font-size: 15px;
-  text-decoration: none;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 3px;
-  color: black;
-  background-color: #fbfbfb4b;
-}

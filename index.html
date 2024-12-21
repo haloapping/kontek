@@ -16,14 +16,14 @@
             <a href="index.html">Contacts</a>
           </li>
           <li>
-            <a href="create-contact.html">Create Contact</a>
+            <a href="add-contact/index.html">Add Contact</a>
           </li>
         </ul>
 
-        <form action="" class="search-form">
+        <form method="post" id="search-form" class="search-form">
           <div>
-            <label for="search">Search</label>
             <input type="search" name="search" id="search" />
+            <button type="submit">Search</button>
           </div>
         </form>
       </nav>
@@ -35,6 +35,7 @@
 
     <footer>&copy; KonTek</footer>
 
+    <script src="storage.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
