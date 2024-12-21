@@ -81,6 +81,8 @@ document.getElementById("search-form").addEventListener("submit", function (even
       contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.label.toLowerCase().includes(keyword.toLowerCase())
   );
+
+  showAllContacts(filteredContacts);
 });
 
 function deleteContactById(ID) {
@@ -95,6 +97,5 @@ function deleteContactById(ID) {
 
 window.addEventListener("load", function () {
   const contacts = loadContacts();
-
   showAllContacts(contacts);
 });
