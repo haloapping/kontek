@@ -31,33 +31,19 @@ note.setAttribute("value", contactByID.note);
 note.textContent = contactByID.note;
 
 const label = document.getElementById("label");
-console.log(label.textContent);
-if (label.textContent === "Partner") {
-  label.options[1].selected = true;
-} else if (label.textContent === "Manager") {
-  label.options[2].selected = true;
-} else if (label.textContent === "Assistant") {
-  label.options[3].selected = true;
-} else if (label.textContent === "Child") {
-  label.options[4].selected = true;
-} else if (label.textContent === "Brother") {
-  label.options[5].selected = true;
-} else {
-  label.options[0].selected = true;
-}
+console.log(label.selectedIndex);
 
 const isFavorited = document.getElementById("is-favorited");
 
 const createdAt = document.getElementById("created-at");
 createdAt.setAttribute("value", contactByID.createdAt);
 
-const updateContactFormData = new FormData(this);
-
 document.getElementById("update-contact-from").addEventListener("submit", function (event) {
   event.preventDefault();
 
+  const updateContactFormData = new FormData(this);
   const updatedContact = {
-    ID: newID,
+    ID: contactID,
     fullName: updateContactFormData.get("full-name"),
     phone: updateContactFormData.get("phone"),
     email: updateContactFormData.get("email"),

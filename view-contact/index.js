@@ -19,7 +19,7 @@ if (!contact) {
   document.getElementById("birthdate").textContent = `Birthdate: ${contact.birthdate}`;
   document.getElementById("note").textContent = `Note: ${contact.note}`;
   document.getElementById("label").textContent = `Label: ${contact.label}`;
-  document.getElementById("isFavorited").textContent = `Favorited: ${contact.isFavorited ? "Yes" : "No"}`;
+  document.getElementById("isFavorited").textContent = `Favorited: ${contact.isFavorited === "yes" ? "Yes" : "No"}`;
   document.getElementById("createdAt").textContent = `Created At: ${contact.createdAt}`;
   document.getElementById("updatedAt").textContent = `Updated At: ${contact.updatedAt || "-"}`;
 }
