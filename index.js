@@ -1,7 +1,19 @@
 function showAllContacts(contacts) {
-  if (contacts.length === 0) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const keyword = urlParams.get("q");
+
+  const contactsToRender = keyword
+    ? searchContactsByKeyword(contacts, keyword)
+    : contacts;
+
+  if (contactsToRender.length === 0) {
     const mainElement = document.getElementById("main");
-    mainElement.innerHTML = `<p>Contact is empty.</p>`;
+
+    mainElement.innerHTML = `<div>
+    <p>Contact not found.</p>
+    ${keyword ? `<p>Keyword: ${keyword}</p>` : ""}
+    </div>`;
+
     return;
   }
 
@@ -36,7 +48,7 @@ function showAllContacts(contacts) {
   mainElement.innerHTML += tableHTMLString;
 
   const tableBodyElement = document.getElementById("table-body");
-  const contactItemElements = contacts.map(
+  const contactItemElements = contactsToRender.map(
     (contact) =>
       `<tr>
         <td>${contact.fullName}</td>
@@ -63,30 +75,20 @@ function showAllContacts(contacts) {
   tableBodyElement.innerHTML = contactItems;
 }
 
-document
-  .getElementById("search-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const searchFormData = new FormData(this);
-    const keyword = searchFormData.get("search");
-    const contacts = loadContacts();
-
-    const filteredContacts = contacts.filter(
-      (contact) =>
-        contact.fullName.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.email.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.company.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.jobTitle.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.address.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.birthdate.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
-        contact.label.toLowerCase().includes(keyword.toLowerCase())
-    );
-
-    showAllContacts(filteredContacts);
-  });
+function searchContactsByKeyword(contacts, keyword) {
+  return contacts.filter(
+    (contact) =>
+      contact.fullName.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.email.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.company.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.jobTitle.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.address.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.birthdate.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.label.toLowerCase().includes(keyword.toLowerCase())
+  );
+}
 
 function deleteContactById(ID) {
   const isDeleted = confirm("Are you sure to delete?");
