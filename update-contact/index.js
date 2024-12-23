@@ -69,7 +69,7 @@ document.getElementById("update-contact-from").addEventListener("submit", functi
     updatedAt: new Date(),
   };
 
-  localStorageContacts.splice(contactID, 0, updatedContact);
+  localStorageContacts[contactByID] = updatedContact;
   saveContacts(localStorageContacts);
 
   alert("Contact is updated");
