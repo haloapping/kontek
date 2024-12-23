@@ -36,7 +36,6 @@ function showAllContacts(contacts) {
   mainElement.innerHTML += tableHTMLString;
 
   const tableBodyElement = document.getElementById("table-body");
-
   const contactItemElements = contacts.map(
     (contact) =>
       `<tr>

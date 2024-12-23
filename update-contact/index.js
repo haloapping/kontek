@@ -31,7 +31,18 @@ note.setAttribute("value", contactByID.note);
 note.textContent = contactByID.note;
 
 const label = document.getElementById("label");
-console.log(label.selectedIndex);
+console.log(label.options[1].selected);
+if (contactByID.label === "Partner") {
+  label.options[1].selected = true;
+} else if (contactByID.label === "Manager") {
+  label.options[2].selected = true;
+} else if (contactByID.label === "Assistant") {
+  label.options[3].selected = true;
+} else if (contactByID.label === "Child") {
+  label.options[4].selected = true;
+} else if (contactByID.label === "Brother") {
+  label.options[5].selected = true;
+}
 
 const isFavorited = document.getElementById("is-favorited");
 
