@@ -51,7 +51,9 @@ function showAllContacts(contacts) {
         <td>${contact.isFavorited == "yes" ? "✅️" : "❌️"}</td>
         <td>
           <a href="/view-contact/?id=${contact.ID}" class="btn-action">View</a>
-          <a href="/update-contact/?id=${contact.ID}" class="btn-action">Update</a>
+          <a href="/update-contact/?id=${
+            contact.ID
+          }" class="btn-action">Update</a>
           <button onclick="deleteContactById(${contact.ID})">Delete</button>
         </td>
       </tr>`
@@ -61,28 +63,30 @@ function showAllContacts(contacts) {
   tableBodyElement.innerHTML = contactItems;
 }
 
-document.getElementById("search-form").addEventListener("submit", function (event) {
-  event.preventDefault();
+document
+  .getElementById("search-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const searchFormData = new FormData(this);
-  const keyword = searchFormData.get("search");
-  const contacts = loadContacts();
+    const searchFormData = new FormData(this);
+    const keyword = searchFormData.get("search");
+    const contacts = loadContacts();
 
-  const filteredContacts = contacts.filter(
-    (contact) =>
-      contact.fullName.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.email.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.company.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.jobTitle.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.address.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.birthdate.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.label.toLowerCase().includes(keyword.toLowerCase())
-  );
+    const filteredContacts = contacts.filter(
+      (contact) =>
+        contact.fullName.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.email.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.company.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.jobTitle.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.address.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.birthdate.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
+        contact.label.toLowerCase().includes(keyword.toLowerCase())
+    );
 
-  showAllContacts(filteredContacts);
-});
+    showAllContacts(filteredContacts);
+  });
 
 function deleteContactById(ID) {
   const isDeleted = confirm("Are you sure to delete?");
@@ -90,7 +94,7 @@ function deleteContactById(ID) {
     const contacts = loadContacts();
     filteredContacts = contacts.filter((contact) => contact.ID !== ID);
     saveContacts(filteredContacts);
-    window.location.href = "/index.html";
+    window.location.href = "/";
   }
 }
 

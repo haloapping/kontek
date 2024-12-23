@@ -2,7 +2,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const contactID = parseInt(urlParams.get("id"));
 
 const localStorageContacts = loadContacts();
-const contactByID = localStorageContacts.find((contact) => contact.ID == contactID);
+const contactByID = localStorageContacts.find(
+  (contact) => contact.ID == contactID
+);
 
 const fullName = document.getElementById("full-name");
 fullName.setAttribute("value", contactByID.fullName);
@@ -49,29 +51,30 @@ const isFavorited = document.getElementById("is-favorited");
 const createdAt = document.getElementById("created-at");
 createdAt.setAttribute("value", contactByID.createdAt);
 
-document.getElementById("update-contact-from").addEventListener("submit", function (event) {
-  event.preventDefault();
+document
+  .getElementById("update-contact-from")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const updateContactFormData = new FormData(this);
-  const updatedContact = {
-    ID: contactID,
-    fullName: updateContactFormData.get("full-name"),
-    phone: updateContactFormData.get("phone"),
-    email: updateContactFormData.get("email"),
-    company: updateContactFormData.get("company"),
-    jobTitle: updateContactFormData.get("job-title"),
-    address: updateContactFormData.get("address"),
-    birthdate: updateContactFormData.get("birthdate"),
-    note: updateContactFormData.get("notes"),
-    label: updateContactFormData.get("label"),
-    isFavorited: updateContactFormData.get("is-favorited"),
-    createdAt: updateContactFormData.get("created-at"),
-    updatedAt: new Date(),
-  };
+    const updateContactFormData = new FormData(this);
+    const updatedContact = {
+      ID: contactID,
+      fullName: updateContactFormData.get("full-name"),
+      phone: updateContactFormData.get("phone"),
+      email: updateContactFormData.get("email"),
+      company: updateContactFormData.get("company"),
+      jobTitle: updateContactFormData.get("job-title"),
+      address: updateContactFormData.get("address"),
+      birthdate: updateContactFormData.get("birthdate"),
+      note: updateContactFormData.get("notes"),
+      label: updateContactFormData.get("label"),
+      isFavorited: updateContactFormData.get("is-favorited"),
+      createdAt: updateContactFormData.get("created-at"),
+      updatedAt: new Date(),
+    };
 
-  localStorageContacts[contactByID] = updatedContact;
-  saveContacts(localStorageContacts);
+    localStorageContacts[contactByID] = updatedContact;
+    saveContacts(localStorageContacts);
 
-  alert("Contact is updated");
-  window.location.href = "/index.html";
-});
+    window.location.href = "/";
+  });
