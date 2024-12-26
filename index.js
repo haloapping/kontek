@@ -1,3 +1,5 @@
+const mainElement = document.getElementById("main");
+
 function search(contacts, keyword) {
   return contacts.filter(
     (contact) =>
@@ -21,8 +23,6 @@ function showAllContacts() {
   const contacts = loadContacts();
   const renderContacts =
     keyword !== null ? search(contacts, keyword) : contacts;
-
-  const mainElement = document.getElementById("main");
 
   if (renderContacts.length === 0) {
     mainElement.innerHTML = `<p class="text-lg text-center">Contact is empty</p>`;
