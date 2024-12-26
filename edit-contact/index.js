@@ -56,7 +56,7 @@ editContactFormElement.addEventListener("submit", function (event) {
     note: editContactFormData.get("note"),
     label: editContactFormData.get("label"),
     isFavorited: editContactFormData.get("is-favorited"),
-    createdAt: editContactFormData.get("createdAt"),
+    createdAt: contactById.createdAt,
     updatedAt: new Date(),
   };
 
