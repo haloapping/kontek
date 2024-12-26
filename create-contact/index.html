@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create | KonTek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="w-3/5 mx-auto">
+    <header class="flex justify-between items-center mt-3">
+      <section class="flex items-center gap-2">
+        <a href="index.html">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+            />
+          </svg>
+        </a>
+        <a class="text-lg" href="/">KonTek</a>
+      </section>
+
+      <section class="flex items-center gap-4">
+        <a class="hover:underline" href="/">Home</a>
+        <a class="hover:underline" href="/create-contact">Create Contanct</a>
+      </section>
+    </header>
+
+    <main class="mt-10">
+      <h1 class="text-lg mb-5">Create Contact</h1>
+      <form
+        method="post"
+        id="create-contact-form"
+        class="flex flex-col justify-between gap-2"
+      >
+        <div>
+          <label for="first-name">First Name</label>
+          <input
+            type="text"
+            placeholder="Gibran"
+            id="first-name"
+            name="first-name"
+            class="border"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="last-name">Last Name</label>
+          <input
+            type="text"
+            placeholder="Fufufafa"
+            id="last-name"
+            name="last-name"
+            class="border"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            placeholder="gibran.fufufafa@jamil.co.id"
+            id="email"
+            name="email"
+            class="border"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="phone">Phone</label>
+          <input
+            type="tel"
+            placeholder="+62 2130752220"
+            id="phone"
+            name="phone"
+            class="border"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="company">Company</label>
+          <input
+            type="text"
+            placeholder="IKN"
+            id="company"
+            name="company"
+            class="border"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="job-title">Job Title</label>
+          <input
+            type="text"
+            placeholder="Vice President"
+            id="job-title"
+            name="job-title"
+            class="border"
+            required
+          />
+        </div>
+
+        <div class="flex items-center gap-1">
+          <label for="address">Address</label>
+          <textarea
+            id="address"
+            name="address"
+            placeholder="IKN"
+            class="border"
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="Birthdate">Birthdate</label>
+          <input
+            type="date"
+            id="birthdate"
+            name="birthdate"
+            class="border"
+            required
+          />
+        </div>
+
+        <div class="flex items-center gap-1">
+          <label for="note">Note</label>
+          <textarea
+            id="note"
+            name="note"
+            placeholder="IPK 2.3"
+            class="border"
+            required
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="label">Label</label>
+          <select name="label" id="label">
+            <option value="-">-</option>
+            <option value="Partner">Partner</option>
+            <option value="Manager">Manager</option>
+            <option value="Boss">Boss</option>
+            <option value="Child">Child</option>
+            <option value="Brother">Brother</option>
+            <option value="Sister">Sister</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="is-favorited">Favorited</label>
+          <select name="is-favorited" id="is-favorited">
+            <option value="-">-</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="w-[200px] border rounded-md bg-slate-400 text-slate-100 mt-6 p-2"
+        >
+          Save
+        </button>
+      </form>
+    </main>
+
+    <footer class="mt-5 text-center text-sm">
+      <p>@KonTek by <a href="https://haloapping.com/">haloapping</a></p>
+    </footer>
+
+    <script src="/storage.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

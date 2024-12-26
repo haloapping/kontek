@@ -1,106 +1,104 @@
-function showAllContacts(contacts) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const keyword = urlParams.get("q");
-
-  const contactsToRender = keyword
-    ? searchContactsByKeyword(contacts, keyword)
-    : contacts;
-
-  if (contactsToRender.length === 0) {
-    const mainElement = document.getElementById("main");
-
-    mainElement.innerHTML = `<div>
-    <p>Contact not found.</p>
-    ${keyword ? `<p>Keyword: ${keyword}</p>` : ""}
-    </div>`;
-
-    return;
-  }
-
-  const tableHTMLString = `
-    <table>
-      <caption>
-        List Contacts
-      </caption>
-      <thead>
-        <tr>
-          <td>Full Name</td>
-          <td>Phone</td>
-          <td>Email</td>
-          <td>Company</td>
-          <td>Job Title</td>
-          <td>Address</td>
-          <td>Birthdate</td>
-          <td>Note</td>
-          <td>Label</td>
-          <td>Favorited</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-
-      <tbody id="table-body">
-        <!-- Table Rows -->
-      </tbody>
-    </table>
-    `;
-
-  const mainElement = document.getElementById("main");
-  mainElement.innerHTML += tableHTMLString;
-
-  const tableBodyElement = document.getElementById("table-body");
-  const contactItemElements = contactsToRender.map(
-    (contact) =>
-      `<tr>
-        <td>${contact.fullName}</td>
-        <td>${contact.phone}</td>
-        <td>${contact.email}</td>
-        <td>${contact.company}</td>
-        <td>${contact.jobTitle}</td>
-        <td>${contact.address}</td>
-        <td>${contact.birthdate}</td>
-        <td>${contact.note}</td>
-        <td>${contact.label}</td>
-        <td>${contact.isFavorited == "yes" ? "✅️" : "❌️"}</td>
-        <td>
-          <a href="/view-contact/?id=${contact.ID}" class="btn-action">View</a>
-          <a href="/update-contact/?id=${
-            contact.ID
-          }" class="btn-action">Update</a>
-          <button onclick="deleteContactById(${contact.ID})">Delete</button>
-        </td>
-      </tr>`
-  );
-
-  const contactItems = contactItemElements.join("");
-  tableBodyElement.innerHTML = contactItems;
-}
-
-function searchContactsByKeyword(contacts, keyword) {
+function search(contacts, keyword) {
   return contacts.filter(
     (contact) =>
-      contact.fullName.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.firstName.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.lastName.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.email.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.phone.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.company.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.jobTitle.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.address.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.birthdate.toLowerCase().includes(keyword.toLowerCase()) ||
       contact.note.toLowerCase().includes(keyword.toLowerCase()) ||
-      contact.label.toLowerCase().includes(keyword.toLowerCase())
+      contact.label.toLowerCase().includes(keyword.toLowerCase()) ||
+      contact.isFavorited.toLowerCase().includes(keyword.toLowerCase())
   );
 }
 
-function deleteContactById(ID) {
-  const isDeleted = confirm("Are you sure to delete?");
+function showAllContacts() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const keyword = urlParams.get("keyword");
+  const contacts = loadContacts();
+  const renderContacts =
+    keyword !== null ? search(contacts, keyword) : contacts;
+
+  const mainElement = document.getElementById("main");
+
+  if (renderContacts.length === 0) {
+    mainElement.innerHTML = `<p class="text-lg text-center">Contact is empty</p>`;
+  } else {
+    mainElement.innerHTML += `
+    <table class="table-fixed border border-collapse">
+    <thead class="text-center">
+        <tr>
+          <td class="border border-collapse font-medium">No</td>
+          <td class="border border-collapse font-medium">First Name</td>
+          <td class="border border-collapse font-medium">Last Name</td>
+          <td class="border border-collapse font-medium">Email</td>
+          <td class="border border-collapse font-medium">Phone</td>
+          <td class="border border-collapse font-medium">Company</td>
+          <td class="border border-collapse font-medium">Job Title</td>
+          <td class="border border-collapse font-medium">Address</td>
+          <td class="border border-collapse font-medium">Birthdate</td>
+          <td class="border border-collapse font-medium">Note</td>
+          <td class="border border-collapse font-medium">Label</td>
+          <td class="border border-collapse font-medium">Favorited</td>
+          <td class="border border-collapse font-medium">Action</td>
+        </tr>
+      </thead>
+
+      <tbody id="table-body"></tbody>
+      </table>`;
+
+    const tableBodyElement = document.getElementById("table-body");
+
+    let contactItemElements = renderContacts.map(
+      (contact, index) =>
+        `<tr class="hover:bg-slate-100">
+          <td class="border border-collapse">${index + 1}</td>
+          <td class="border border-collapse">${contact.firstName}</td>
+          <td class="border border-collapse">${contact.lastName}</td>
+          <td class="border border-collapse">${contact.email}</td>
+          <td class="border border-collapse">${contact.phone}</td>
+          <td class="border border-collapse">${contact.company}</td>
+          <td class="border border-collapse">${contact.jobTitle}</td>
+          <td class="border border-collapse">${contact.address}</td>
+          <td class="border border-collapse">${contact.birthdate}</td>
+          <td class="border border-collapse">${contact.note}</td>
+          <td class="border border-collapse">${contact.label}</td>
+          <td class="border border-collapse">${contact.isFavorited}</td>
+          <td class="flex flex-wrap gap-3 border border-collapse">
+          <a href="view-contact/?id=${contact.id}">
+          <img class="w-6" src="icon/view.svg" alt="view action">
+          </a>
+
+            <a href="edit-contact/?id=${contact.id}">
+              <img class="w-6" src="icon/edit.svg" alt="edit action">
+            </a>
+            
+            <button onclick="deleteByID(${contact.id})">
+            <img class="w-6" src="icon/delete.svg" alt="delete action">
+            </button>
+            </td>
+            </tr>`
+    );
+
+    const contactItemString = contactItemElements.join("");
+    tableBodyElement.innerHTML += contactItemString;
+  }
+}
+
+function deleteByID(id) {
+  const isDeleted = confirm("Are you sure to delete this data?");
   if (isDeleted) {
     const contacts = loadContacts();
-    filteredContacts = contacts.filter((contact) => contact.ID !== ID);
+    const filteredContacts = contacts.filter((contact) => contact.id !== id);
     saveContacts(filteredContacts);
+
     window.location.href = "/";
   }
 }
 
 window.addEventListener("load", function () {
-  const contacts = loadContacts();
-  showAllContacts(contacts);
+  showAllContacts();
 });
