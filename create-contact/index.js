@@ -1,8 +1,10 @@
 const createContactFormElement = document.getElementById("create-contact-form");
+
 createContactFormElement.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const formData = new FormData(this);
+  const formData = new FormData(createContactFormElement);
+
   const newContact = {
     id: Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
     firstName: formData.get("first-name"),
@@ -22,6 +24,7 @@ createContactFormElement.addEventListener("submit", function (event) {
 
   let contacts = loadContacts();
   contacts.push(newContact);
+
   saveContacts(contacts);
 
   window.location.href = "/";
